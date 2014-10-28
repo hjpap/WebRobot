@@ -1,0 +1,115 @@
+/*!
+RobotAnimate.css - http://www.ohric.com
+Licensed under the MIT license - http://opensource.org/licenses/MIT
+
+Copyright (c) 2014 Wei.Wang
+*/
+
+/*
+ *   眨眼
+ */
+.blinkanimate{
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-name: blinkanimate;
+    animation-name: blinkanimate;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes blinkanimate {
+    from {
+        height:3px;
+    }
+    1% {
+        height:0px;
+    }
+    10% {
+        height:3px;
+    }
+    to {
+        height:3px;
+    }
+}
+@keyframes blinkanimate {
+    from {
+        height:3px;
+    }
+    1% {
+        height:1px;
+    }
+    10% {
+        height:3px;
+    }
+    to {
+        height:3px;
+    }
+}
+/*
+ *   摆手
+ */
+.wavehandanimate{
+    -webkit-animation-duration: 0.1s;
+    animation-duration: 0.1s;
+    -webkit-animation-name: wavehandanimate;
+    animation-name: wavehandanimate;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@keyframes wavehandanimate{
+    from{
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform:  translateY(0);
+    }
+    25%{
+        -webkit-transform: translateY(3px);
+        -ms-transform: translateY(3px);
+        transform:  translateY(3px);
+    }
+    50%{
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform:  translateY(0);
+    }
+    75%{
+        -webkit-transform: translateY(-3px);
+        -ms-transform: translateY(-3px);
+        transform:  translateY(-3px);
+    }
+    to{
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform:  translateY(0);
+    }
+}
+@-webkit-keyframes wavehandanimate{
+    from{
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform:  translateY(0);
+    }
+    25%{
+        -webkit-transform: translateY(3px);
+        -ms-transform: translateY(3px);
+        transform:  translateY(3px);
+    }
+    50%{
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform:  translateY(0);
+    }
+    75%{
+        -webkit-transform: translateY(-3px);
+        -ms-transform: translateY(-3px);
+        transform:  translateY(-3px);
+    }
+    to{
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform:  translateY(0);
+    }
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/webrobot.css">
+    <style>
+        /*
+        *   Robot
+        */
+        /* -----head----- */
+        body{
+            padding: 20px;
+            background:darkgrey;
+        }
+        .webrobot{
+            -webkit-user-select:none;
+        }
+        .robot-body{
+            position: relative;
+            width: 14px;
+            height: 14px;
+            background: black;
+            border-radius: 100%;
+            -moz-border-radius: 100%;
+            -o-border-radius: 100%;
+
+        }
+        .robot-head{
+            position: absolute;
+            top:-5px;
+            left:1px;
+            width: 12px;
+            height: 12px;
+            background: black;
+            border-radius: 100%;
+            -moz-border-radius: 100%;
+            -o-border-radius: 100%;
+        }
+        .eye{
+            position: absolute;
+            top:4px;
+            width: 3px;
+            height:3px;
+            background: #fff;
+        }
+        .left-eye{
+            left:2px;
+        }
+        .right-eye{
+            right:2px;
+        }
+        .robot-hand{
+            position: absolute;
+            top:5px;
+            width: 2px;
+            height: 2px;
+            background: black;
+            border-radius: 100%;
+            -moz-border-radius: 100%;
+            -o-border-radius: 100%;
+            /*display: none;*/
+        }
+        .left-hand{
+            left:-4px;
+        }
+        .right-hand{
+            right:-4px;
+        }
+        .body-shadow{
+            box-shadow: 0 0px 5px #ddd;
+        }
+        .head-shadow{
+            box-shadow: 0 1px 2px #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="webrobot">
+        <div class="robot-body body-shadow">
+            <div class="robot-head head-shadow">
+                <div class="left-eye eye blinkanimate"></div>
+                <div class="right-eye eye blinkanimate"></div>
+            </div>
+            <div class="left-hand robot-hand wavehandanimate"></div>
+            <div class="right-hand robot-hand wavehandanimate"></div>
+        </div>
+    </div>
+
+<script src="js/webrobot.js"></script>
+</body>
+</html>
