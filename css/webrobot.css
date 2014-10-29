@@ -319,22 +319,59 @@ Copyright (c) 2014 Wei.Wang
 /*
  *  身体大一下
  */
-.webrobot .bigoneceanimate{
+.webrobot .biganimate{
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
-    -webkit-animation-name: bigoneceanimate;
-    animation-name: bigoneceanimate;
+    -webkit-animation-name: biganimate;
+    animation-name: biganimate;
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
-@-webkit-keyframes bigoneceanimate{
+@-webkit-keyframes biganimate{
     from{
         -webkit-transform: scale3d(1, 1, 1);
         transform: scale3d(1, 1, 1);
     }
     35%{
+        -webkit-transform: scale3d(1.4, 1.4, 1.4);
+        transform: scale3d(1.4, 1.4, 1.4);
+    }
+    to{
+        -webkit-transform: scale3d(1.3, 1.3, 1.3);
+        transform: scale3d(1.3, 1.3, 1.3);
+    }
+}
+@keyframes biganimate{
+    from{
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+    35%{
+        -webkit-transform: scale3d(1.4, 1.4, 1.4);
+        transform: scale3d(1.4, 1.4, 1.4);
+    }
+    to{
+        -webkit-transform: scale3d(1.3, 1.3, 1.3);
+        transform: scale3d(1.3, 1.3, 1.3);
+    }
+}
+/*
+ *  身体恢复大小
+ */
+.webrobot .bigtodefaulanimate{
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-name: bigtodefaulanimate;
+    animation-name: bigtodefaulanimate;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes bigtodefaulanimate{
+    from{
         -webkit-transform: scale3d(1.3, 1.3, 1.3);
         transform: scale3d(1.3, 1.3, 1.3);
     }
@@ -343,14 +380,10 @@ Copyright (c) 2014 Wei.Wang
         transform: scale3d(1, 1, 1);
     }
 }
-@keyframes bigoneceanimate{
+@keyframes bigtodefaulanimate{
     from{
-        -webkit-transform: scale3d(1, 1, 1);
-        transform: scale3d(1, 1, 1);
-    }
-    25%{
-        -webkit-transform: scale3d(1.1, 1.1, 1.1);
-        transform: scale3d(1.1, 1.1, 1.1);
+        -webkit-transform: scale3d(1.3, 1.3, 1.3);
+        transform: scale3d(1.3, 1.3, 1.3);
     }
     to{
         -webkit-transform: scale3d(1, 1, 1);

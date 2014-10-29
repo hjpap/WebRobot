@@ -14,8 +14,8 @@
 <!--
     <div style="position: relative;top:100px" class="webrobot ">
         <div class="robot-body body-shadow">
-            <div class="robot-head head-shadow retractedheadanimate">
-                <div class="left-eye eye starteye">
+            <div class="robot-head head-shadow raiseheadanimate">
+                <div class="left-eye eye blinkeyeanimate">
                     <div class="robot-eyeball"></div>
                     <div class="robot-eyeball2"></div>
                 </div>
@@ -33,8 +33,35 @@
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/webrobot.js"></script>
 <script>
-    var wr = new WebRobot();
-    wr.blinkEye();
+    var robot = new WebRobot(null,{});
+    robot.defaultRobotState = function(){
+        robot.raiseHead();
+        robot.blinkEye();
+        robot.setHandDefault();
+    }
+    robot.defaultRobotState();
+
+    robot.bodyMouseDownHandle = function(){
+        robot.defaultRobotState();
+        robot.raiseHeightHead();
+        robot.bigBody();
+        robot.startEye();
+        robot.waveHand();
+    }
+    robot.bodyMouseUpHandle = function(){
+        robot.defaultRobotState();
+        robot.bigBodyToDefault();
+        robot.heightToRaiseHead();
+    }
+    robot.bodyMouseOverHandle = function(){
+        robot.startEye();
+    }
+    robot.bodyMouseLeaveHandle = function(){
+        robot.blinkEye();
+    }
+    robot.bodyMouseMoveHandle = function(){
+
+    }
 
 </script>
 </body>

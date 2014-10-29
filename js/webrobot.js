@@ -2,6 +2,17 @@
  * Created by wei.wang on 14-10-28.
  */
 (function(){
+    /* Event */
+    var hasTouch = ('ontouchstart' in window) && window.navigator.platform!="Win32" ;
+    var EventName = {
+        RESIZE_EVENT:'onorientationchange' in window ?'orientationchange':'resize',
+        START_EVENT: hasTouch?'touchstart':"mousedown",
+        MOVE_EVENT:hasTouch?'touchmove':'mousemove',
+        END_EVENT:hasTouch?'touchend':'mouseup',
+        CANCEL_EVENT:hasTouch?'touchcancel':'mouseup',
+        OVER_EVENT:'mouseover',
+        LEAVE_EVENT:'mouseleave'
+    }
     var _template = '<div class="webrobot">\
                         <div id="body" class="robot-body body-shadow">\
                             <div id="head" class="robot-head head-shadow">\
@@ -33,7 +44,9 @@
         /*抬高头到抬头*/
         raiseheadtoheight:"raiseheadtoheightanimate",
         /*身体大一下*/
-        bigonece:"bigoneceanimate",
+        bigbody:"biganimate",
+        /*身体恢复大小*/
+        bigtodefaultbody:"bigtodefaulanimate",
         /*眯眼*/
         squinteye:"squinteye",
         /*星星眼*/
@@ -44,6 +57,11 @@
         var self = this;
 
         self._aniName = _animationCss;
+        self._opt = {};
+        for(var i in opt){
+            self._opt[i] = opt[i];
+        }
+
         /* Dom */
         self._rootDom = $(_template);
         self._bodyDom = null;
@@ -70,9 +88,68 @@
                     $("body").append(self._rootDom);
             }
         }
+
+        var _e = {
+            bodyEvent:function(){
+                self.mouseDown = false;
+                var moveFun;
+                /* body mouse start */
+                self._bodyDom.bind(EventName.START_EVENT,function(e){
+                    self.mouseDown = true;
+                    self._rootDom.css("position","fixed");
+                    self._rootDom.css("left", e.pageX-5);
+                    self._rootDom.css("top", e.pageY-2);
+
+                    /*  mouse move */
+                    $(document).bind(EventName.MOVE_EVENT,moveFun = function(e){
+                        if(self.mouseDown){
+                            self._rootDom.css("left", e.pageX-5);
+                            self._rootDom.css("top", e.pageY-2);
+                            if(self.bodyMouseMoveHandle){
+                                self.bodyMouseMoveHandle(e);
+                            }
+                        }
+                    });
+                    $(document).bind(EventName.END_EVENT,moveEndFun = function(){
+                        self.mouseDown = false;
+                        $("body").unbind(EventName.MOVE_EVENT,moveFun);
+                        $("body").unbind(EventName.MOVE_EVENT,moveEndFun);
+                        if(self.bodyMouseUpHandle){
+                            self.bodyMouseUpHandle(e);
+                        }
+                    });
+                    if(self.bodyMouseDownHandle){
+                        self.bodyMouseDownHandle(e);
+                    }
+                });
+
+                /* body mouse end */
+                self._bodyDom.bind(EventName.END_EVENT,function(e){
+                    if(self.bodyMouseUpHandle){
+                        self.bodyMouseUpHandle(e);
+                    }
+                });
+                /* body mouse over */
+                self._bodyDom.bind(EventName.OVER_EVENT,function(e){
+                    if(self.bodyMouseOverHandle){
+                        self.bodyMouseOverHandle(e);
+                    }
+                });
+                /* body mouse leave */
+                self._bodyDom.bind(EventName.LEAVE_EVENT,function(e){
+                    if(self.bodyMouseLeaveHandle){
+                        self.bodyMouseLeaveHandle(e);
+                    }
+                });
+            }
+        }
         _f.init();
+        _e.bodyEvent();
     }
     WebRobot.prototype = {
+        /* robot default state */
+        defaultRobotState:null,
+        /* action */
         setDefaultCss : function(){
             var self = this;
             self.setBodyDefault();
@@ -161,7 +238,40 @@
                 return;
             self._leftHandDom.addClass(_animationCss.wavehand);
             self._rightHandDom.addClass(_animationCss.wavehand);
-        }
+        },
+        bigBody:function(flag){
+            var self = this;
+            self.setBodyDefault();
+            if(flag === false)
+                return;
+            self._bodyDom.addClass(_animationCss.bigbody);
+        },
+        bigBodyToDefault:function(flag){
+            var self = this;
+            self.setBodyDefault();
+            if(flag === false)
+                return;
+            self._bodyDom.addClass(_animationCss.bigtodefaultbody);
+        },
+        /* emotion */
+        fretfully:function(flag){
+            var self = this;
+            if(self.defaultRobotState)
+                self.defaultRobotState();
+            else
+                self.setDefaultCss();
+            if(flag === false)
+                return;
+            self.waveHand();
+            self.raiseHeightHead();
+            self.startEye();
+        },
+        /* customer event handle */
+        bodyMouseDownHandle:null,
+        bodyMouseUpHandle:null,
+        bodyMouseMoveHandle:null,
+        bodyMouseOverHandle:null,
+        bodyMouseLeaveHandle:null
     }
 
     window.WebRobot = WebRobot;
