@@ -28,6 +28,7 @@
                             <div id="lefthand" class="left-hand robot-hand"></div>\
                             <div id="righthand" class="right-hand robot-hand"></div>\
                         </div>\
+                        <div id="messagebox" class="messagebox"><div class="msgtxt">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div></div>\
                     </div>';
 
     var _animationCss = {
@@ -70,6 +71,7 @@
         self._rightEyeDom = null;
         self._leftHandDom = null;
         self._rightHandDom = null;
+        self._messageBoxDom = null;
 
         var _f = {
             initDom:function(){
@@ -79,6 +81,7 @@
                 self._rightEyeDom = self._rootDom.find("#righteye");
                 self._leftHandDom = self._rootDom.find("#lefthand");
                 self._rightHandDom = self._rootDom.find("#righthand");
+                self._messageBoxDom = self._rootDom.find("#messagebox");
             },
             init:function(){
                 this.initDom();

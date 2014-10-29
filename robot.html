@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="css/webrobot.css">
     <style>
         body{
-            padding: 20px;
+            padding: 50px;
             background:darkgrey;
         }
     </style>
@@ -33,35 +33,46 @@
 <script src="js/jquery-1.10.2.min.js"></script>
 <script src="js/webrobot.js"></script>
 <script>
-    var robot = new WebRobot(null,{});
-    robot.defaultRobotState = function(){
-        robot.raiseHead();
-        robot.blinkEye();
-        robot.setHandDefault();
-    }
-    robot.defaultRobotState();
+    (function(){
+        var robot;
+        var _f = {
+            initRobot:function(){
+                robot = new WebRobot(null,{});
+                robot.defaultRobotState = function(){
+                    robot.blinkEye();
+                    robot.setHandDefault();
+                }
+                robot.defaultRobotState();
+                robot.bodyMouseDownHandle = function(){
+                    robot.defaultRobotState();
+                    robot.raiseHeightHead();
+                    robot.bigBody();
+                    robot.startEye();
+                    robot.waveHand();
+                }
+                robot.bodyMouseUpHandle = function(){
+                    robot.defaultRobotState();
+                    robot.bigBodyToDefault();
+                    robot.heightToRaiseHead();
+                }
+                robot.bodyMouseOverHandle = function(){
+                    robot.startEye();
+                }
+                robot.bodyMouseLeaveHandle = function(){
+                    robot.blinkEye();
+                }
+            },
+            init:function(){
+                this.initRobot();
+            }
+        }
+        _f.init();
+        window.myRotbot = {
+            robot:robot
+        };
+    })();
 
-    robot.bodyMouseDownHandle = function(){
-        robot.defaultRobotState();
-        robot.raiseHeightHead();
-        robot.bigBody();
-        robot.startEye();
-        robot.waveHand();
-    }
-    robot.bodyMouseUpHandle = function(){
-        robot.defaultRobotState();
-        robot.bigBodyToDefault();
-        robot.heightToRaiseHead();
-    }
-    robot.bodyMouseOverHandle = function(){
-        robot.startEye();
-    }
-    robot.bodyMouseLeaveHandle = function(){
-        robot.blinkEye();
-    }
-    robot.bodyMouseMoveHandle = function(){
 
-    }
 
 </script>
 </body>

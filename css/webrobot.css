@@ -11,6 +11,7 @@ Copyright (c) 2014 Wei.Wang
  **************************/
 .webrobot{
     -webkit-user-select:none;
+    position:relative;
 }
 /* -----body----- */
 .robot-body{
@@ -433,4 +434,27 @@ Copyright (c) 2014 Wei.Wang
 .webrobot .starteye .robot-eyeball2:after{
     top:-1px;
     left:0px;
+}
+
+/*  -----Message Box-----  */
+.webrobot .messagebox{
+    position: absolute;
+    left:20px;
+    bottom:20px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    width:150px;
+    min-height:18px;
+    color:#fff;
+    background: rgba(0,0,0,.3);
+}
+.webrobot .messagebox .msgtxt{
+    line-height: 15px;
+    font-size: 13px;
+    word-wrap: break-word;
+    word-break: normal;
+}
+.webrobot .messagebox input{
+    width:100%;
+    box-sizing: border-box;
 }
