@@ -101,7 +101,6 @@
                 /* body mouse start */
                 self._bodyDom.bind(EventName.START_EVENT,function(e){
                     self.mouseDown = true;
-                    self._rootDom.css("position","fixed");
                     self._rootDom.css("left", e.pageX-5);
                     self._rootDom.css("top", e.pageY-2);
 
@@ -164,6 +163,9 @@
         /* robot default state */
         defaultRobotState:null,
         /* action */
+        /*
+         *初始化robot
+         * */
         setDefaultCss : function(){
             var self = this;
             self.setBodyDefault();
@@ -171,24 +173,39 @@
             self.setEyesDefault();
             self.setHandDefault();
         },
+        /*
+        *初始化body
+        * */
         setBodyDefault:function(){
             var self = this;
             self._bodyDom.removeClass().addClass("robot-body body-shadow");
         },
+        /*
+         *初始化head
+         * */
         setHeadDefault:function(){
             var self = this;
             self._headDom.removeClass().addClass("robot-head head-shadow");
         },
+        /*
+         *初始化eyes
+         * */
         setEyesDefault:function(){
             var self = this;
             self._leftEyeDom.removeClass().addClass("left-eye eye");
             self._rightEyeDom.removeClass().addClass("right-eye eye");
         },
+        /*
+         *初始化hand
+         * */
         setHandDefault:function(){
             var self = this;
             self._leftHandDom.removeClass().addClass("left-hand robot-hand");
             self._rightHandDom.removeClass().addClass("right-hand robot-hand");
         },
+        /*
+         *眨眼
+         * */
         blinkEye:function(flag){
             var self = this;
             self.setEyesDefault();
@@ -197,6 +214,9 @@
             self._leftEyeDom.addClass(_animationCss.blinkeye);
             self._rightEyeDom.addClass(_animationCss.blinkeye);
         },
+        /*
+         *眯眼
+         * */
         squintEye:function(flag){
             var self = this;
             self.setEyesDefault();
@@ -205,6 +225,9 @@
             self._leftEyeDom.addClass(_animationCss.squinteye);
             self._rightEyeDom.addClass(_animationCss.squinteye);
         },
+        /*
+         *迷糊眼
+         * */
         startEye:function(flag){
             var self = this;
             self.setEyesDefault();
@@ -213,6 +236,9 @@
             self._leftEyeDom.addClass(_animationCss.starteye);
             self._rightEyeDom.addClass(_animationCss.starteye);
         },
+        /*
+         *缩头
+         * */
         retractedHead:function(flag){
             var self = this;
             self.setHeadDefault();
@@ -220,6 +246,9 @@
                 return;
             self._headDom.addClass(_animationCss.retractedhead);
         },
+        /*
+         *抬头
+         * */
         raiseHead:function(flag){
             var self = this;
             self.retractedHead();
@@ -227,6 +256,9 @@
                 return;
             self._headDom.addClass(_animationCss.raisehead);
         },
+        /*
+         *头从很高的状态复原到抬头状态
+         * */
         heightToRaiseHead:function(flag){
             var self = this;
             self.setHeadDefault();
@@ -234,6 +266,9 @@
                 return;
             self._headDom.addClass(_animationCss.raiseheadtoheight);
         },
+        /*
+         *抬高头状态
+         * */
         raiseHeightHead:function(flag){
             var self = this;
             if(flag === "raise"){
@@ -245,6 +280,9 @@
                 return;
             self._headDom.addClass(_animationCss.raiseheadheight);
         },
+        /*
+         *摇摆手
+         * */
         waveHand:function(flag){
             var self = this;
             self.setHandDefault();
@@ -253,6 +291,9 @@
             self._leftHandDom.addClass(_animationCss.wavehand);
             self._rightHandDom.addClass(_animationCss.wavehand);
         },
+        /*
+         *身体变大
+         * */
         bigBody:function(flag){
             var self = this;
             self.setBodyDefault();
@@ -260,6 +301,9 @@
                 return;
             self._bodyDom.addClass(_animationCss.bigbody);
         },
+        /*
+         *复原身体状态
+         * */
         bigBodyToDefault:function(flag){
             var self = this;
             self.setBodyDefault();
@@ -267,25 +311,18 @@
                 return;
             self._bodyDom.addClass(_animationCss.bigtodefaultbody);
         },
-        showMsg:function(flag){
-            var self = this;
-            if(!flag){
-                if(self._messageBoxDom.hasClass(_animationCss.showmsg))
-                    self._messageBoxDom.removeClass(_animationCss.showmsg);
-                else
-                    self._messageBoxDom.addClass(_animationCss.showmsg);
-            }else if(flag == true){
-                self._messageBoxDom.addClass(_animationCss.showmsg);
-            }else{
-                self._messageBoxDom.removeClass(_animationCss.showmsg);
-            }
-        },
+        /*
+         *显示消息框 - 带内容 - 说话
+         * */
         say:function(msg){
             var self = this;
             self._messageBoxDom.find("#msgtext").text(msg);
             self.showMsg(true);
         },
         /* emotion */
+        /*
+         *着急地
+         * */
         fretfully:function(flag){
             var self = this;
             if(self.defaultRobotState)
@@ -303,7 +340,23 @@
         bodyMouseUpHandle:null,
         bodyMouseMoveHandle:null,
         bodyMouseOverHandle:null,
-        bodyMouseLeaveHandle:null
+        bodyMouseLeaveHandle:null,
+        /*
+         *显示消息框
+         * */
+        showMsg:function(flag){
+            var self = this;
+            if(!flag){
+                if(self._messageBoxDom.hasClass(_animationCss.showmsg))
+                    self._messageBoxDom.removeClass(_animationCss.showmsg);
+                else
+                    self._messageBoxDom.addClass(_animationCss.showmsg);
+            }else if(flag == true){
+                self._messageBoxDom.addClass(_animationCss.showmsg);
+            }else{
+                self._messageBoxDom.removeClass(_animationCss.showmsg);
+            }
+        }
     }
 
     window.WebRobot = WebRobot;

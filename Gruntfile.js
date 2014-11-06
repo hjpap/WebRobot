@@ -16,12 +16,12 @@ module.exports = function(grunt) {
                 files: {
                     'release/js/webrobot.min.js': ['js/webrobot.js']
                 }
-            }
+            },
 			//all_target: {
             //    files: {
-            //        'release/js/all.min.js': ['js/**/*.js']
+            //        'release/js/all.min.js': ['release/js/**/*.js','release/js/**/!*.min.js']
             //    }
-           // }
+            //}
         },
         watch: {
             scripts: {
@@ -37,14 +37,17 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['js/**/*.js'],
-                dest: 'release/js/all.js'
+                src: ['release/js/**/*.js'],
+                dest: 'release/one/all.js'
             }
         },
         autoprefixer: {
+            options:{
+                browsers: ['last 2 version', 'ie 8', 'ie 9']
+            },
             autofixer_target: {
                 src: 'css/webrobot.css',
-                dest: 'release/css/webrobot.css'
+                dest: 'release/css/webrobot.fix.css'
             }
         },
         cssmin: {
@@ -57,18 +60,6 @@ module.exports = function(grunt) {
             }
         }
     });
-       //    grunt.initConfig({
-//        uglify: {
-//            my_target: {
-//                files: [{
-//                    expand: true,
-//                    cwd: 'src/js',
-//                    src: '**/*.js',
-//                    dest: 'dest/js'
-//                }]
-//            }
-//        }
-//    });
 
 
     // 加载包含 "uglify" 任务的插件。
@@ -82,7 +73,8 @@ module.exports = function(grunt) {
     grunt.registerTask("autoprefixerTest",["autoprefixer"]);
     grunt.registerTask('uglifyTest', ['uglify']);
     grunt.registerTask('concatTest', ['concat']);
-    grunt.registerTask('watchTask', ['watch','uglify']);
 
-    grunt.registerTask('all', ['uglify','autoprefixer','cssmin']);
+    grunt.registerTask('watchTask', ['watch','uglify','concat','autoprefixer','cssmin']);
+
+    grunt.registerTask('once', ['uglify','concat','autoprefixer','cssmin']);
 };
