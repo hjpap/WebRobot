@@ -28,7 +28,7 @@
                             <div id="lefthand" class="left-hand robot-hand"></div>\
                             <div id="righthand" class="right-hand robot-hand"></div>\
                         </div>\
-                        <div id="messagebox" class="messagebox"><div class="msgtxt">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div></div>\
+                        <div id="messagebox" class="messagebox"><div id="msgtext" class="msgtxt">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</div><div id="msgclose" class="msgclose"></div></div>\
                     </div>';
 
     var _animationCss = {
@@ -51,7 +51,9 @@
         /*眯眼*/
         squinteye:"squinteye",
         /*星星眼*/
-        starteye:"starteye"
+        starteye:"starteye",
+        /*显示消息框*/
+        showmsg:"showmsg"
     }
 
     var WebRobot = function(host,opt){
@@ -144,10 +146,19 @@
                         self.bodyMouseLeaveHandle(e);
                     }
                 });
+            },
+            msgEvent:function(){
+                self._messageBoxDom.find("#msgclose").bind(EventName.END_EVENT,function(e){
+                   self.showMsg();
+                });
+            },
+            init:function(){
+                this.bodyEvent();
+                this.msgEvent();
             }
         }
         _f.init();
-        _e.bodyEvent();
+        _e.init();
     }
     WebRobot.prototype = {
         /* robot default state */
@@ -255,6 +266,24 @@
             if(flag === false)
                 return;
             self._bodyDom.addClass(_animationCss.bigtodefaultbody);
+        },
+        showMsg:function(flag){
+            var self = this;
+            if(!flag){
+                if(self._messageBoxDom.hasClass(_animationCss.showmsg))
+                    self._messageBoxDom.removeClass(_animationCss.showmsg);
+                else
+                    self._messageBoxDom.addClass(_animationCss.showmsg);
+            }else if(flag == true){
+                self._messageBoxDom.addClass(_animationCss.showmsg);
+            }else{
+                self._messageBoxDom.removeClass(_animationCss.showmsg);
+            }
+        },
+        say:function(msg){
+            var self = this;
+            self._messageBoxDom.find("#msgtext").text(msg);
+            self.showMsg(true);
         },
         /* emotion */
         fretfully:function(flag){

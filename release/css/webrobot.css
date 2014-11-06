@@ -531,11 +531,15 @@ Copyright (c) 2014 Wei.Wang
 }
 @keyframes showmsg{
     from{
-        transform-origin:left bottom;
-        transform: scale3d(0, 0, 0);
+        -webkit-transform-origin:left bottom;
+                transform-origin:left bottom;
+        -webkit-transform: scale3d(0, 0, 0);
+                transform: scale3d(0, 0, 0);
     }
     to{
-        transform-origin:left bottom;
-        transform: scale3d(1, 1, 1);
+        -webkit-transform-origin:left bottom;
+                transform-origin:left bottom;
+        -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
     }
 }
