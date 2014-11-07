@@ -25,8 +25,8 @@ module.exports = function(grunt) {
         },
         watch: {
             scripts: {
-                files: '**/*.js',
-                tasks: ['default'],
+                files: ['**/*.js','**/*.css'],
+                tasks: ['once'],
                 options: {
                     interrupt: true
                 }
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     grunt.registerTask('uglifyTest', ['uglify']);
     grunt.registerTask('concatTest', ['concat']);
 
-    grunt.registerTask('watchTask', ['watch','uglify','concat','autoprefixer','cssmin']);
+    grunt.registerTask('watchTask', ['watch']);
 
     grunt.registerTask('once', ['uglify','concat','autoprefixer','cssmin']);
 };

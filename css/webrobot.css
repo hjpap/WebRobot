@@ -12,6 +12,7 @@ Copyright (c) 2014 Wei.Wang
 .webrobot{
     -webkit-user-select:none;
     position:relative;
+    display:inline-block;
 }
 /* -----body----- */
 .robot-body{
@@ -22,7 +23,6 @@ Copyright (c) 2014 Wei.Wang
     border-radius: 100%;
     -moz-border-radius: 100%;
     -o-border-radius: 100%;
-
 }
 /* -----head----- */
 .robot-head{

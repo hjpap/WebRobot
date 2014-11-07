@@ -101,12 +101,13 @@
                 /* body mouse start */
                 self._bodyDom.bind(EventName.START_EVENT,function(e){
                     self.mouseDown = true;
-                    self._rootDom.css("left", e.pageX-5);
-                    self._rootDom.css("top", e.pageY-2);
+                    //self._rootDom.css("left", e.pageX-5);
+                   // self._rootDom.css("top", e.pageY-2);
 
                     /*  mouse move */
                     $(document).bind(EventName.MOVE_EVENT,moveFun = function(e){
                         if(self.mouseDown){
+                            self._rootDom.css("position", "fixed");
                             self._rootDom.css("left", e.pageX-5);
                             self._rootDom.css("top", e.pageY-2);
                             if(self.bodyMouseMoveHandle){

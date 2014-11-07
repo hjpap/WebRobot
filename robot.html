@@ -5,8 +5,12 @@
   <!--link rel="stylesheet" href="css/webrobot.css"-->
   <link rel="stylesheet" href="release/css/webrobot.min.css">
     <style>
-        body{
-            padding: 50px;
+        html,body{
+            width:100%;
+            height:100%;
+            margin:0;
+            padding: 0;
+            font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial;
         }
         hr {
             border: none;
@@ -15,10 +19,54 @@
             background-color: #c0c8c9;
             background-image: -webkit-linear-gradient(0deg, #fff, #c0c8c9, #fff);
         }
+        .content{
+            margin:auto;
+            padding:200px 20px 0 20px;
+            text-align: center;
+        }
+        .section{
+            width:100%;
+            height: 40px;
+            margin-bottom: 20px;
+            font-size: 27px;
+            color:#000000;
+            font-weight: bold;
+        }
+        select{
+            outline-color: aqua;
+        }
     </style>
 </head>
 <body>
-<hr>
+
+<div class="content">
+    <div class="section">
+        A Sample HTML R <span id="robothost"></span> bot.
+    </div>
+    <hr>
+   <div>
+       <label>
+           Action:
+            <select id="actionselect" type="text">
+                <option value="defaultcss">setDefaultCss()</option>
+                <option value="squintEye">squintEye()</option>
+                <option value="startEye">startEye()</option>
+                <option value="blinkEye">blinkEye()</option>
+                <option value="raiseHead">raiseHead()</option>
+                <option value="raiseHeightHead">raiseHeightHead()</option>
+                <option value="heightToRaiseHead">heightToRaiseHead()</option>
+                <option value="retractedHead">retractedHead()</option>
+                <option value="waveHand">waveHand()</option>
+                <option value="bigBody">bigBody()</option>
+                <option value="bigBodyToDefault">bigBodyToDefault()</option>
+                <option value="say">say()</option>
+                <option value="fretfully">fretfully()</option>
+            </select>
+       </label>
+       <div><a href="https://github.com/hjpap/WebRobot">Fork me on GitHub</a></div>
+   </div>
+</div>
+
 <!--
     <div style="position: relative;top:100px" class="webrobot ">
         <div class="robot-body body-shadow">
@@ -38,16 +86,17 @@
     </div>
 -->
 
-<script src="js/jquery-1.10.2.min.js"></script>
+<!--script src="js/jquery-1.10.2.min.js"></script-->
 <!--script src="js/webrobot.js"></script-->
 <!--script src="release/js/webrobot.min.js"></script-->
 <script src="release/one/all.js"></script>
 <script>
     (function(){
+        var host = $("#robothost");
         var robot;
         var _f = {
             initRobot:function(){
-                robot = new WebRobot(null,{});
+                robot = new WebRobot(host,{});
                 robot.defaultRobotState = function(){
                     robot.blinkEye();
                     robot.setHandDefault();
@@ -76,7 +125,55 @@
                 this.initRobot();
             }
         }
+        _pageEvent = {
+            selectEvent:function(){
+                $("#actionselect").on("change.changeEvent",function(){
+                    switch (this.value){
+                        case "defaultcss":
+                            robot.setDefaultCss();
+                                break;
+                        case "blinkEye":
+                            robot.blinkEye();
+                                break;
+                        case "squintEye":
+                            robot.squintEye();
+                                break;
+                        case "startEye":
+                            robot.startEye();
+                                break;
+                        case "raiseHead":
+                                robot.raiseHead();
+                            break;
+                        case "retractedHead":
+                            robot.retractedHead();
+                                break;
+                        case "heightToRaiseHead":
+                            robot.heightToRaiseHead();
+                                break;
+                        case "raiseHeightHead":
+                            robot.raiseHeightHead();
+                                break;
+                        case "waveHand":
+                            robot.waveHand();
+                                break;
+                        case "bigBody":
+                            robot.bigBody();
+                                break;
+                        case "bigBodyToDefault":
+                            robot.bigBodyToDefault();
+                            break;
+                        case "say":
+                            robot.say();
+                                break;
+                        case "fretfully":
+                            robot.fretfully();
+                            break;
+                    }
+                });
+            }
+        }
         _f.init();
+        _pageEvent.selectEvent();
         window.myRotbot = {
             robot:robot
         };
